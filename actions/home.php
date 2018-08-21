@@ -103,6 +103,8 @@ if (isset($_POST["submit"])) {
 	$data->setId($authData["id"]);
 	$data = $data->returnLastLog();
 
+	$ip = json_decode($data->description);
+
 	if(!empty($authData["code"])) {
 		$code = json_decode($authData["code"]);
 	}
@@ -144,7 +146,7 @@ if (isset($_POST["submit"])) {
 		"lg-save" => $lang["common"]["save"],
 		"lg-cancel" => $lang["common"]["cancel"],
 		"lg-login" => $mdl_lang["account"]["login"],
-		"ip" => $data->ip,
+		"ip" => (isset($ip->ip)) ? $ip->ip : "",
 		"login-date" => $data->date,
 		"md5-email" => md5($authData["email"]),
 		"lg-auth" => $mdl_lang["account"]["auth"],
@@ -177,3 +179,4 @@ if (isset($_POST["submit"])) {
 
 
 include "pages/module-core.php";
+
