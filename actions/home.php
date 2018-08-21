@@ -122,9 +122,9 @@ if (isset($_POST["submit"])) {
 
 			$list .= bo3::c2r([
 				"name" => $field->name,
-				"lg-name" => $mdl_lang["label"]["{$field_name}"],
+				"lg-name" => (isset($mdl_lang["label"]["{$field_name}"])) ? $mdl_lang["label"]["{$field_name}"] : "",
 				"value" => (isset($code) && !empty($code->{$field_name})) ? $code->{$field_name} : "",
-				"ph" => $mdl_lang["placeholder"]["{$field_name}"],
+				"ph" => (isset($mdl_lang["placeholder"]["{$field_name}"])) ? $mdl_lang["placeholder"]["{$field_name}"] : "",
 				"required" => ($field->required) ? "required" : ""
 			], $item_tpl);
 		}
@@ -179,4 +179,3 @@ if (isset($_POST["submit"])) {
 
 
 include "pages/module-core.php";
-
