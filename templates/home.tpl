@@ -1,87 +1,128 @@
-{c2r-return-message}
-
-<!-- User Info  -->
-<div class="spacer all-15"></div>
-<div id="info" class="row">
-	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-		<div class="row">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tacenter">
-				<img src="http://www.gravatar.com/avatar/{c2r-md5-email}?s=150&r=g&d=mm" class="rounded-circle" alt="gravatar" title="gravatar">
-			</div>
-			<div class="col-12 col-sm-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-lg-2">
-				<div class="spacer all-30"></div>
-				<div class="row">
-					<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 tacenter">
-						<p>{c2r-lg-username}</p>
-						<h4>{c2r-username}</h4>
-						<div class="spacer all-15"></div>
-						<p>{c2r-lg-email}</p>
-						<h4>{c2r-email}</h4>
+<div class="spacer all-30"></div>
+<div class="row">
+	<div class="col-12 col-sm-12 col-lg-4">
+		<div class="avatar-placeholder b-{c2r-rank} tacenter">
+			<img src="http://www.gravatar.com/avatar/{c2r-md5-email}?s=150&r=g&d=mm" class="rounded-circle" alt="gravatar" title="I'm the {c2r-rank} and this is my Gravatar!">
+		</div>
+		<div class="spacer all-60"></div>
+		<div class="username">
+			<label for="username">{c2r-lg-username}</label>
+			<h4><strong>{c2r-username}</strong></h4>
+		</div>
+		<div class="spacer all-30"></div>
+		<div class="email">
+			<label for="email">{c2r-lg-email}</label>
+			<h4><strong>{c2r-email}</strong></h4>
+		</div>
+		<div class="spacer all-30"></div>
+		<div class="date">
+			<label for="date">{c2r-lg-date}</label>
+			<h4 title="{c2r-full-date}"><strong>{c2r-date}</strong></h4>
+		</div>
+		<div class="spacer all-30"></div>
+		<div class="login">
+			<label for="date">{c2r-lg-login}</label>
+			<h4><strong>{c2r-ip}</strong></h4>
+			<h4><strong>{c2r-login-date}</strong></h4>
+		</div>
+		<div class="spacer all-30"></div>
+	</div>
+	<div class="col-12 col-sm-12 col-lg-8">
+		<form method="post" action="{c2r-path-bo}/{c2r-lg}/6-account/">
+			<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active btn btn-success" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">{c2r-lg-info}</a>
+				</li>
+				<span class="block all-15"></span>
+				<li class="nav-item">
+					<a class="nav-link btn btn-success" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">{c2r-lg-auth}</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="pills-tabContent">
+				<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+					<div class="row">
+						<div class="col">
+							<h5>{c2r-lg-username-change}</h5>
+						</div>
 					</div>
-					<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 tacenter">
-						<p>{c2r-lg-rank}</p>
-						<h4>{c2r-rank}</h4>
-						<div class="spacer all-15"></div>
-						<p>{c2r-lg-date}</p>
-						<h4>{c2r-date}</h4>
+					<div class="spacer all-15"></div>
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+								<input type="text" class="form-control" id="username" placeholder="{c2r-username-ph}" name="username">
+							</div>
+						</div>
+					</div>
+					<div class="spacer all-30"></div>
+					<div class="row">
+						<div class="col">
+							<h5>{c2r-lg-email-change}</h5>
+						</div>
+					</div>
+					<div class="spacer all-15"></div>
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+								<input type="text" class="form-control" id="email" placeholder="{c2r-email-ph}" name="email">
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<input type="text" class="form-control" id="checkemail" placeholder="{c2r-email-confirm-ph}" name="checkemail">
+							</div>
+						</div>
+					</div>
+					<div class="spacer all-30"></div>
+					<div class="row">
+						<div class="col">
+							<h5>{c2r-lg-information-change}</h5>
+						</div>
+					</div>
+					<div class="spacer all-15"></div>
+					{c2r-list}
+				</div>
+
+				<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+					<div class="row">
+						<div class="col">
+							<h5>{c2r-lg-password}</h5>
+						</div>
+					</div>
+					<div class="spacer all-15"></div>
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+								<input type="password" class="form-control" id="oldpassword" placeholder="{c2r-old-password-ph}" name="oldPassword">
+							</div>
+						</div>
+					</div>
+					<div class="spacer all-15"></div>
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+								<input type="password" class="form-control" id="newpassword" placeholder="{c2r-password-ph}" name="newPassword">
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<input type="password" class="form-control" id="check" placeholder="{c2r-password-confirm-ph}" name="checkPassword">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="spacer all-60"></div>
+				<div class="row">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 taright">
+						<button type="submit" class="btn btn-success btn-save" name="submit">
+							<i class="fas fa-save" aria-hidden="true"></i>
+							<div class="block all-15"></div> {c2r-lg-save}
+						</button>
+						<div class="spacer all-60"></div>
 					</div>
 				</div>
 			</div>
-			<div class="col-4 col-sm-3 col-md-3 col-lg-3 col-xl-3"></div>
-		</div>
+		</form>
 	</div>
 </div>
-<div class="spacer all-30"></div>
-<!-- Form -->
 
-<form method="post" action="{c2r-path-bo}/{c2r-lg}/6-account/">
-	<div class="row">
-		<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-			<div class="row">
-				<div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-					<div class="form-group">
-						<label for="formGroupExampleInput">{c2r-lg-password}</label>
-						<input type="password" class="form-control" id="oldpassword" placeholder="Type your old password" name="oldPassword">
-					</div>
-					<div class="spacer all-15"></div>
-					<div class="form-group">
-						<input type="password" class="form-control" id="newpassword" placeholder="Type your new password" name="newPassword">
-					</div>
-					<div class="spacer all-15"></div>
-					<div class="form-group">
-						<input type="password" class="form-control" id="check" placeholder="Confirm your password" name="checkPassword">
-					</div>
-				</div>
-				<div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-					<div class="form-group">
-						<label for="formGroupExampleInput2">{c2r-lg-email-change}</label>
-						<input type="text" class="form-control" id="email" placeholder="Input your new email" name="email">
-					</div>
-					<div class="spacer all-15"></div>
-					<div class="form-group">
-						<input type="text" class="form-control" id="checkemail" placeholder="Confirm your new email" name="checkemail">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="spacer all-30"></div>
-	<div class="row">
-		<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tacenter">
-			<div class="d-inline">
-				<a href="{c2r-path-bo}/{c2r-lg}/home/" role="button" class="btn btn-secondary btn-cancel">
-					<i class="fas fa-times" aria-hidden="true"></i>
-					<div class="block all-15"></div> {c2r-lg-cancel}
-				</a>
-			</div>
-			<span class="block all-15"></span>
-			<div class="d-inline">
-				<button type="submit" class="btn btn-success btn-save" name="submit">
-					<i class="fas fa-save" aria-hidden="true"></i>
-					<div class="block all-15"></div> {c2r-lg-save}
-				</button>
-			</div>
-			<div class="spacer all-60"></div>
-		</div>
-	</div>
-</form>
+<div class="spacer all-60"></div>

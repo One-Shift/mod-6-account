@@ -54,10 +54,16 @@ if (isset($_POST["submit"])) {
 		$pw_success = true;
 	}
 
+	//other informations
+
 	if (isset($pw_success) && isset($email_success)) {
-		$user->setUsername($authData["username"]);
+		$user->setUsername(
+			(isset($_POST["username"]) && !empty($_POST["username"])) ? $_POST["username"] : $authData["username"]
+		);
 		$user->setRank($authData["rank"]);
-		$user->setCode($authData["code"]);
+		$user->setCode(
+			(isset($_POST["info"]) && !empty($_POST["info"])) ? json_encode($_POST["info"], JSON_UNESCAPED_UNICODE) : ""
+		);
 		$user->setStatus($authData["status"]);
 		$user->setUserKey();
 		$user->setDate($authData["date"]);
@@ -85,25 +91,89 @@ if (isset($_POST["submit"])) {
 				"lg-message" => sprintf($mdl_lang["account"]["failure"], $cfg->email->support)
 			], $message_tpl);
 		}
-		//$user->insert()
+
+		$mdl = bo3::c2r([
+			"content" => $returnMessage
+		],bo3::mdl_load("templates/result.tpl"));
+
+		header("Refresh:5");
 	}
+} else {
+	$data = new user();
+	$data->setId($authData["id"]);
+	$data = $data->returnLastLog();
+
+	if(!empty($authData["code"])) {
+		$code = json_decode($authData["code"]);
+	}
+
+	$fields = user::returnFields();
+
+	if(!empty($fields)) {
+		foreach ($fields as $f => $field) {
+			if(!isset($list)) {
+				$list = "";
+				$item_tpl = bo3::mdl_load("templates-e/item.tpl");
+			}
+
+			$field_name = strtolower($field->name);
+
+			$list .= bo3::c2r([
+				"name" => $field->name,
+				"lg-name" => $mdl_lang["label"]["{$field_name}"],
+				"value" => (isset($code) && !empty($code->{$field_name})) ? $code->{$field_name} : "",
+				"ph" => $mdl_lang["placeholder"]["{$field_name}"],
+				"required" => ($field->required) ? "required" : ""
+			], $item_tpl);
+		}
+	}
+
+	$mdl = bo3::c2r([
+		"return-message" => (isset($returnMessage) && !empty($returnMessage)) ? $returnMessage : null,
+		"lg-username" => $mdl_lang["account"]["username"],
+		"username" => $authData["username"],
+		"lg-email" => $mdl_lang["account"]["email"],
+		"email" => $authData["email"],
+		"lg-rank" => $mdl_lang["account"]["rank"],
+		"rank" => $authData["rank"],
+		"lg-date" => $mdl_lang["account"]["date"],
+		"date" => date('Y-m-d', strtotime($authData["date"])),
+		"full-date" => $authData["date"],
+		"lg-password" => $mdl_lang["account"]["password"],
+		"lg-email-change" => $mdl_lang["account"]["email_change"],
+		"lg-save" => $lang["common"]["save"],
+		"lg-cancel" => $lang["common"]["cancel"],
+		"lg-login" => $mdl_lang["account"]["login"],
+		"ip" => $data->ip,
+		"login-date" => $data->date,
+		"md5-email" => md5($authData["email"]),
+		"lg-auth" => $mdl_lang["account"]["auth"],
+		"lg-info" => $mdl_lang["account"]["info"],
+		"lg-username-change" => $mdl_lang["account"]["username_change"],
+		"lg-information-change" => $mdl_lang["account"]["other_info"],
+
+		//placeholders
+		"username-ph" => $mdl_lang["placeholder"]["username"],
+		"email-ph" => $mdl_lang["placeholder"]["email"],
+		"email-confirm-ph" => $mdl_lang["placeholder"]["email-confirm"],
+		"address-ph" => $mdl_lang["placeholder"]["address"],
+		"company-ph" => $mdl_lang["placeholder"]["company"],
+		"phone-ph" => $mdl_lang["placeholder"]["phone"],
+		"old-password-ph" => $mdl_lang["placeholder"]["old-password"],
+		"password-ph" => $mdl_lang["placeholder"]["password"],
+		"password-confirm-ph" => $mdl_lang["placeholder"]["password-confirm"],
+
+
+		//labels
+		"lg-address" => $mdl_lang["label"]["address"],
+		"lg-phone" => $mdl_lang["label"]["phone"],
+		"lg-company" => $mdl_lang["label"]["company"],
+
+		//custom fields values
+		"list" => (isset($list)) ? $list : ""
+
+	], bo3::mdl_load("templates/home.tpl"));
 }
 
-$mdl = bo3::c2r([
-	"return-message" => (isset($returnMessage) && !empty($returnMessage)) ? $returnMessage : null,
-	"lg-username" => $mdl_lang["account"]["username"],
-	"username" => $authData["username"],
-	"lg-email" => $mdl_lang["account"]["email"],
-	"email" => $authData["email"],
-	"lg-rank" => $mdl_lang["account"]["rank"],
-	"rank" => $authData["rank"],
-	"lg-date" => $mdl_lang["account"]["date"],
-	"date" => $authData["date"],
-	"lg-password" => $mdl_lang["account"]["password"],
-	"lg-email-change" => $mdl_lang["account"]["email_change"],
-	"lg-save" => $lang["common"]["save"],
-	"lg-cancel" => $lang["common"]["cancel"],
-	"md5-email" => md5($authData["email"])
-], bo3::mdl_load("templates/home.tpl"));
 
 include "pages/module-core.php";
