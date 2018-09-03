@@ -148,8 +148,13 @@ if (isset($_POST["submit"])) {
 		"lg-save" => $lang["common"]["save"],
 		"lg-cancel" => $lang["common"]["cancel"],
 		"lg-login" => $mdl_lang["account"]["login"],
+<<<<<<< HEAD
 		"ip" => (isset($ip->ip)) ? $ip->ip : "",
 		"login-date" => (!empty($data)) ? $data->date : "",
+=======
+		"ip" => $data->ip,
+		"login-date" => $data->date,
+>>>>>>> master
 		"md5-email" => md5($authData["email"]),
 		"lg-auth" => $mdl_lang["account"]["auth"],
 		"lg-info" => $mdl_lang["account"]["info"],
