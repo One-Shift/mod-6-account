@@ -146,7 +146,7 @@ if (isset($_POST["submit"])) {
 		"lg-save" => $lang["common"]["save"],
 		"lg-cancel" => $lang["common"]["cancel"],
 		"lg-login" => $mdl_lang["account"]["login"],
-		"ip" => (isset($ip->ip)) ? $ip->ip : "",
+		"ip" => $data->ip,
 		"login-date" => $data->date,
 		"md5-email" => md5($authData["email"]),
 		"lg-auth" => $mdl_lang["account"]["auth"],
