@@ -103,7 +103,9 @@ if (isset($_POST["submit"])) {
 	$data->setId($authData["id"]);
 	$data = $data->returnLastLog();
 
-	$ip = json_decode($data->description);
+	if(!empty($data)) {
+		$ip = json_decode($data->description);
+	}
 
 	if(!empty($authData["code"])) {
 		$code = json_decode($authData["code"]);
@@ -122,9 +124,9 @@ if (isset($_POST["submit"])) {
 
 			$list .= bo3::c2r([
 				"name" => $field->name,
-				"lg-name" => (isset($mdl_lang["label"]["{$field_name}"])) ? $mdl_lang["label"]["{$field_name}"] : "",
+				"lg-name" => $mdl_lang["label"]["{$field_name}"],
 				"value" => (isset($code) && !empty($code->{$field_name})) ? $code->{$field_name} : "",
-				"ph" => (isset($mdl_lang["placeholder"]["{$field_name}"])) ? $mdl_lang["placeholder"]["{$field_name}"] : "",
+				"ph" => $mdl_lang["placeholder"]["{$field_name}"],
 				"required" => ($field->required) ? "required" : ""
 			], $item_tpl);
 		}
@@ -147,7 +149,7 @@ if (isset($_POST["submit"])) {
 		"lg-cancel" => $lang["common"]["cancel"],
 		"lg-login" => $mdl_lang["account"]["login"],
 		"ip" => (isset($ip->ip)) ? $ip->ip : "",
-		"login-date" => $data->date,
+		"login-date" => (!empty($data)) ? $data->date : "",
 		"md5-email" => md5($authData["email"]),
 		"lg-auth" => $mdl_lang["account"]["auth"],
 		"lg-info" => $mdl_lang["account"]["info"],
