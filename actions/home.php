@@ -6,7 +6,7 @@ if (isset($_POST["submit"])) {
 
 	$returnMessage = null;
 
-	$user = new user();
+	$user = new c9_user();
 	$user->setId($authData["id"]);
 
 	// Email Confirmation
@@ -26,7 +26,7 @@ if (isset($_POST["submit"])) {
 
 	// Password Confirmation
 	if (!empty($_POST["oldPassword"])) {
-		if(user::getSecurePassword($_POST["oldPassword"]) == $authData["password"]) {
+		if (c9_user::getSecurePassword($_POST["oldPassword"]) == $authData["password"]) {
 			if(!empty($_POST["newPassword"])) {
 				if($_POST["newPassword"] == $_POST["checkPassword"]){
 					$user->setPassword($_POST["newPassword"]);
@@ -55,7 +55,6 @@ if (isset($_POST["submit"])) {
 	}
 
 	//other informations
-
 	if (isset($pw_success) && isset($email_success)) {
 		$user->setUsername(
 			(isset($_POST["username"]) && !empty($_POST["username"])) ? $_POST["username"] : $authData["username"]
@@ -94,26 +93,26 @@ if (isset($_POST["submit"])) {
 
 		$mdl = bo3::c2r([
 			"content" => $returnMessage
-		],bo3::mdl_load("templates/result.tpl"));
+		], bo3::mdl_load("templates/result.tpl"));
 
 		header("Refresh:5");
 	}
 } else {
-	$data = new user();
+	$data = new c9_user();
 	$data->setId($authData["id"]);
 	$data = $data->returnLastLog();
 
-	if(!empty($data)) {
+	if (!empty($data)) {
 		$ip = json_decode($data->description);
 	}
 
-	if(!empty($authData["code"])) {
+	if (!empty($authData["code"])) {
 		$code = json_decode($authData["code"]);
 	}
 
-	$fields = user::returnFields();
+	$fields = c9_user::returnFields();
 
-	if(!empty($fields)) {
+	if (!empty($fields)) {
 		foreach ($fields as $f => $field) {
 			if(!isset($list)) {
 				$list = "";
@@ -167,7 +166,6 @@ if (isset($_POST["submit"])) {
 		"password-ph" => $mdl_lang["placeholder"]["password"],
 		"password-confirm-ph" => $mdl_lang["placeholder"]["password-confirm"],
 
-
 		//labels
 		"lg-address" => $mdl_lang["label"]["address"],
 		"lg-phone" => $mdl_lang["label"]["phone"],
@@ -175,7 +173,6 @@ if (isset($_POST["submit"])) {
 
 		//custom fields values
 		"list" => (isset($list)) ? $list : ""
-
 	], bo3::mdl_load("templates/home.tpl"));
 }
 
