@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST["submitInstall"]) && user::isOwner($authData)) {
+if (isset($_POST["submitInstall"]) && c9_user::isOwner($authData)) {
 	$db = bo3::c2r([
 		"mod-name" => $cfg->mdl->name,
 		"mod-folder" => $cfg->mdl->folder,
@@ -20,6 +20,7 @@ if (isset($_POST["submitInstall"]) && user::isOwner($authData)) {
 	}
 } else {
 	$mdl = bo3::c2r([
+		"changelog" => bo3::mdl_load("templates/changelog.tpl"),
 		"lg-install" => $lang["install"]["question"],
 		"lg-yes" => $lang["common"]["a-yes"],
 		"lg-no" => $lang["common"]["a-no"]

@@ -4,10 +4,10 @@ $cfg->mdl = new stdClass();
 $cfg->mdl->name = "Account";
 $cfg->mdl->folder = "mod-6-account";
 $cfg->mdl->path = "{$cfg->system->path_bo}/modules/{$cfg->mdl->folder}/";
-$cfg->mdl->version = "0.0.6";
+$cfg->mdl->version = "0.0.7";
 $cfg->mdl->developer = "Rafael Duarte";
 $cfg->mdl->contact = "rafaeljfduarte@gmail.com";
-$cfg->mdl->dbTables = ["users","trash"];
+$cfg->mdl->dbTables = ["9_users","trash"];
 
 // load language for module
 if (file_exists("modules/{$cfg->mdl->folder}/languages/{$lg_s}.ini")) {
