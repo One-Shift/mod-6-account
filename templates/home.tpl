@@ -28,7 +28,7 @@
 		<div class="spacer all-30"></div>
 	</div>
 	<div class="col-12 col-sm-12 col-lg-8">
-		<form method="post" action="{c2r-path-bo}/{c2r-lg}/6-account/">
+		<form method="post" action="{c2r-bo-path}/{c2r-lg}/6-account/">
 			<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 				<li class="nav-item">
 					<a class="nav-link active btn btn-success" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">{c2r-lg-info}</a>
@@ -126,3 +126,4 @@
 </div>
 
 <div class="spacer all-60"></div>
+
