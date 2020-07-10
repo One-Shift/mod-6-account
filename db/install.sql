@@ -1,1 +1,1 @@
-INSERT INTO `{c2r-prefix}_modules` (`folder`, `sort`) VALUES ("{c2r-mod-folder}", 0);
+INSERT INTO `{{ prefix }}_modules` (`folder`, `sort`) VALUES ("{{ mod-folder }}", 0);
