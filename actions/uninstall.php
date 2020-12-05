@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST["submitUninstall"]) && c9_user::isOwner($authData)) {
-	$d$sqlb = bo3::c2r([
+	$sql = bo3::c2r([
 		"mod-folder" => $cfg->mdl->folder,
 		"prefix" => $cfg->db->prefix
 	], bo3::mdl_load("db/uninstall.sql"));
